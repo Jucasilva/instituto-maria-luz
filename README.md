@@ -364,6 +364,6 @@ Agradecemos ao Instituto Maria Luz por permitir que documentássemos seu importa
 
 ---
 
-**Desenvolvido com ❤️ para transformar vidas através da educação.**
+**Desenvolvido por João Victor com ❤️ para transformar vidas através da educação.**
 
 Última atualização: Fevereiro de 2026
