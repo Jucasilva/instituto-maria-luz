@@ -81,8 +81,8 @@ export default function Hero() {
           {/* Imagem - Direita */}
           <div className="relative h-96 md:h-full min-h-96 animate-in fade-in slide-in-from-right-8 duration-700 delay-200">
             <img
-              src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663349875959/ImPNhjceGkbBxQtt.jpeg"
-              alt="Instituto Maria Luz - Sala de Aula com Crianças"
+              src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663349875959/QqnnrBOoEiCjAGTQ.jpeg"
+              alt="Instituto Maria Luz - Cartaz com Crianças"
               className="w-full h-full object-cover rounded-2xl shadow-2xl"
             />
             {/* Decorative elements */}
