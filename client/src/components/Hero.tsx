@@ -81,13 +81,13 @@ export default function Hero() {
           {/* Imagem - Direita */}
           <div className="relative h-96 md:h-full min-h-96 animate-in fade-in slide-in-from-right-8 duration-700 delay-200">
             <img
-              src="https://private-us-east-1.manuscdn.com/sessionFile/ljQC4ZGDLZbBpaF40s1fqs/sandbox/pEWoeEc9S42Pp0vjzMb3e5-img-1_1771866486000_na1fn_aGVyby1hbGZhYmV0aXphY2Fv.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvbGpRQzRaR0RMWmJCcGFGNDBzMWZxcy9zYW5kYm94L3BFV29lRWM5UzQyUHAwdmp6TWIzZTUtaW1nLTFfMTc3MTg2NjQ4NjAwMF9uYTFmbl9hR1Z5YnkxaGJHWmhZbVYwYVhwaFkyRnYucG5nP3gtb3NzLXByb2Nlc3M9aW1hZ2UvcmVzaXplLHdfMTkyMCxoXzE5MjAvZm9ybWF0LHdlYnAvcXVhbGl0eSxxXzgwIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzk4NzYxNjAwfX19XX0_&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=b~drphyIxiXf0HseUHnjkLIjSi-PaGEvjHkl03ILxKrF9djIfAhYfs-bUCuzIms0EuB0MIxJcaLBAwHqoOhx2kgzK1DCpiVzgh1i-YR1KoYnVv85yWXYLo0NnhK9NON2MOCm8UxQuc3aQ~iZeG5OV~YiWcplpEveye4z54YT4eqCxRxWSi4w1ihOcKj0SJVdc9YnZcou6JNwEFgr4NNOhQuHJABgX3QDN9BZ3ydc-cz0PhNZHalBMjX6UkOGp4442GwEWmlbRidaxu6ZAF37ykT5mjEs-QKOd4JYPg9xYwRAI3~An6ZcdiwoLvct9~9jwTsvQuLPUU6RFvODAXTSgA__"
-              alt="Alfabetização - Instituto Maria Luz"
+              src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663349875959/hdAbhMplGHkDDKIy.jpeg"
+              alt="Instituto Maria Luz - Cartaz com Mão Colorida"
               className="w-full h-full object-cover rounded-2xl shadow-2xl"
             />
             {/* Decorative elements */}
-            <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-primary/10 rounded-full blur-2xl"></div>
-            <div className="absolute -top-4 -left-4 w-32 h-32 bg-secondary/10 rounded-full blur-2xl"></div>
+            <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-primary/10 rounded-full blur-2xl hidden"></div>
+            <div className="absolute -top-4 -left-4 w-32 h-32 bg-secondary/10 rounded-full blur-2xl hidden"></div>
           </div>
         </div>
       </div>
