@@ -1,6 +1,9 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* Google Fonts - Design Humanista */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -43,39 +46,45 @@
 }
 
 :root {
-  --primary: var(--color-blue-700);
-  --primary-foreground: var(--color-blue-50);
-  --sidebar-primary: var(--color-blue-600);
-  --sidebar-primary-foreground: var(--color-blue-50);
-  --chart-1: var(--color-blue-300);
-  --chart-2: var(--color-blue-500);
-  --chart-3: var(--color-blue-600);
-  --chart-4: var(--color-blue-700);
-  --chart-5: var(--color-blue-800);
+  /* Design Humanista - Instituto Maria Luz */
+  /* Verde Esperança: crescimento, renovação, vida */
+  /* Terra Queimada: calor humano, comunidade */
+  /* Azul Céu: confiança, futuro */
+  /* Bege Natural: acolhimento, segurança */
+  
+  --primary: #2D7A4A; /* Verde Esperança */
+  --primary-foreground: #F5F1ED; /* Bege Natural */
+  --sidebar-primary: #2D7A4A;
+  --sidebar-primary-foreground: #F5F1ED;
+  --chart-1: #4A9FBF; /* Azul Céu */
+  --chart-2: #2D7A4A; /* Verde Esperança */
+  --chart-3: #C85A3A; /* Terra Queimada */
+  --chart-4: #2D7A4A;
+  --chart-5: #4A9FBF;
   --radius: 0.65rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.235 0.015 65);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.235 0.015 65);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.235 0.015 65);
-  --secondary: oklch(0.98 0.001 286.375);
-  --secondary-foreground: oklch(0.4 0.015 65);
-  --muted: oklch(0.967 0.001 286.375);
-  --muted-foreground: oklch(0.552 0.016 285.938);
-  --accent: oklch(0.967 0.001 286.375);
-  --accent-foreground: oklch(0.141 0.005 285.823);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.92 0.004 286.32);
-  --input: oklch(0.92 0.004 286.32);
-  --ring: oklch(0.623 0.214 259.815);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.235 0.015 65);
-  --sidebar-accent: oklch(0.967 0.001 286.375);
-  --sidebar-accent-foreground: oklch(0.141 0.005 285.823);
-  --sidebar-border: oklch(0.92 0.004 286.32);
-  --sidebar-ring: oklch(0.623 0.214 259.815);
+  --background: #F5F1ED; /* Bege Natural */
+  --foreground: #2C3E50; /* Cinza Escuro */
+  --card: #FFFFFF; /* Branco */
+  --card-foreground: #2C3E50;
+  --popover: #FFFFFF;
+  --popover-foreground: #2C3E50;
+  --secondary: #C85A3A; /* Terra Queimada */
+  --secondary-foreground: #F5F1ED;
+  --muted: #E8E3DB; /* Bege Claro */
+  --muted-foreground: #7A8A8F;
+  --accent: #4A9FBF; /* Azul Céu */
+  --accent-foreground: #FFFFFF;
+  --destructive: #C85A3A;
+  --destructive-foreground: #FFFFFF;
+  --border: #E8E3DB;
+  --input: #FFFFFF;
+  --ring: #2D7A4A;
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #2C3E50;
+  --sidebar-accent: #2D7A4A;
+  --sidebar-accent-foreground: #F5F1ED;
+  --sidebar-border: #E8E3DB;
+  --sidebar-ring: #2D7A4A;
 }
 
 .dark {
