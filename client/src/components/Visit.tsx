@@ -1,14 +1,34 @@
 import { Card } from "@/components/ui/card";
 import { Quote, Users } from "lucide-react";
+import ImageCarousel from "./ImageCarousel";
 
 /**
  * Design Humanista - Visit Component
- * Destaca o relato da visita com depoimento
+ * Destaca o relato da visita com depoimento e carrossel de fotos
  * Tipografia: Poppins Bold para título, Inter para depoimento
  * Cores: Azul Céu como primária
- * Layout: Assimétrico com quote à esquerda, imagem à direita
+ * Layout: Assimétrico com quote à esquerda, carrossel à direita
  */
 export default function Visit() {
+  const visitImages = [
+    {
+      src: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663349875959/ImPNhjceGkbBxQtt.jpeg",
+      alt: "Visita ao Instituto Maria Luz - Sala de Aula",
+    },
+    {
+      src: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663349875959/BgSnrJeQMRNjPBmR.jpeg",
+      alt: "Cartaz Instituto Maria Luz - Mão Colorida",
+    },
+    {
+      src: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663349875959/yLnSGrVxJNlpVTjn.jpeg",
+      alt: "Cartaz Maravilhosas - Valores do Instituto",
+    },
+    {
+      src: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663349875959/MlOsQguixCvqyBrB.jpeg",
+      alt: "Decoração Instituto Maria Luz - Árvore Verde",
+    },
+  ];
+
   return (
     <section id="visita" className="py-12 md:py-24 bg-muted/30">
       <div className="container">
@@ -73,16 +93,9 @@ export default function Visit() {
             </div>
           </div>
 
-          {/* Imagem - Direita */}
-          <div className="relative h-96 md:h-full min-h-96 animate-in fade-in slide-in-from-right-8 duration-700 delay-200">
-            <img
-              src="https://private-us-east-1.manuscdn.com/sessionFile/ljQC4ZGDLZbBpaF40s1fqs/sandbox/pEWoeEc9S42Pp0vjzMb3e5-img-4_1771866475000_na1fn_YmFja2dyb3VuZC1wYXR0ZXJu.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvbGpRQzRaR0RMWmJCcGFGNDBzMWZxcy9zYW5kYm94L3BFV29lRWM5UzQyUHAwdmp6TWIzZTUtaW1nLTRfMTc3MTg2NjQ3NTAwMF9uYTFmbl9ZbUZqYTJkeWIzVnVaQzF3WVhSMFpYSnUucG5nP3gtb3NzLXByb2Nlc3M9aW1hZ2UvcmVzaXplLHdfMTkyMCxoXzE5MjAvZm9ybWF0LHdlYnAvcXVhbGl0eSxxXzgwIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzk4NzYxNjAwfX19XX0_&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=g5YXdXuIBJjLPaByY6xMqh6WEU20slbGZelqqfH8tTMxiF6WOauBkUorLlsp0xUs90M3J7i1v7j1zGQGPr3nFG~9SOt8pcle2hkRpNCxX~aRNLjxosm-Ahve0buv4J~NJiARkAVqFh3eu1EEraZBvEGpczvMjdilyIG7SX~U9c-eX2v9O3lPcqKNyIDioiZJINPUStAy5Bv13VQ4ONz0yX0Vj4wQMzs~~DpbJy8bKVWH8gS-dT3WFAdikbmlO2oaaRCpsE5ounp9-0pGDpS6srmqHdDifwPVk4y8ySsKo3Ee-vgYLLdwLmYwR27kr2e2a9-igHlRDeNSlCZgbTQlpQ__"
-              alt="Padrão decorativo"
-              className="w-full h-full object-cover rounded-2xl shadow-2xl"
-            />
-            {/* Decorative elements */}
-            <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-accent/10 rounded-full blur-2xl"></div>
-            <div className="absolute -top-4 -left-4 w-32 h-32 bg-primary/10 rounded-full blur-2xl"></div>
+          {/* Carrossel de Imagens - Direita */}
+          <div className="animate-in fade-in slide-in-from-right-8 duration-700 delay-200">
+            <ImageCarousel images={visitImages} autoplay={true} interval={5000} />
           </div>
         </div>
       </div>
