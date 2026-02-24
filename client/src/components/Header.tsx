@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { useLocation } from "wouter";
 
 /**
  * Design Humanista - Header Component
@@ -10,6 +11,7 @@ import { useState } from "react";
  */
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [, setLocation] = useLocation();
 
   const navItems = [
     { label: "Início", href: "#inicio" },
@@ -47,15 +49,23 @@ export default function Header() {
               {item.label}
             </a>
           ))}
-          <Button
-            className="bg-primary hover:bg-primary/90 text-primary-foreground"
-            onClick={() => {
-              const contactSection = document.getElementById("contato");
-              contactSection?.scrollIntoView({ behavior: "smooth" });
-            }}
-          >
-            Ajude-nos
-          </Button>
+          <div className="flex items-center gap-3">
+            <Button
+              variant="outline"
+              onClick={() => setLocation("/login")}
+            >
+              Login
+            </Button>
+            <Button
+              className="bg-primary hover:bg-primary/90 text-primary-foreground"
+              onClick={() => {
+                const contactSection = document.getElementById("contato");
+                contactSection?.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              Ajude-nos
+            </Button>
+          </div>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -81,6 +91,16 @@ export default function Header() {
                   {item.label}
                 </a>
               ))}
+              <Button 
+                variant="outline"
+                className="w-full"
+                onClick={() => {
+                  setLocation("/login");
+                  setIsOpen(false);
+                }}
+              >
+                Login
+              </Button>
               <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
                 Ajude-nos
               </Button>
