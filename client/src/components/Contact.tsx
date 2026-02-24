@@ -33,8 +33,8 @@ export default function Contact() {
       icon: Linkedin,
       label: "LinkedIn",
       value: "Instituto Maria Luz",
-      href: "#",
-    },
+      href: "https://br.linkedin.com/in/instituto-maria-luz-ong-7b963a245?utm_source=share&utm_medium=member_mweb&utm_campaign=share_via&utm_content=profile",
+    }
   ];
 
   return (
