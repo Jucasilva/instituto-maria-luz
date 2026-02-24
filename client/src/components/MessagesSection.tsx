@@ -82,11 +82,11 @@ export default function MessagesSection() {
                 />
               </div>
               <Textarea
-                placeholder="Sua mensagem (mínimo 10 caracteres)"
+                placeholder="Sua mensagem (mínimo 100 caracteres)"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 required
-                minLength={10}
+                minLength={100}
                 rows={5}
                 className="border-border resize-none"
               />
