@@ -25,4 +25,40 @@ export const users = mysqlTable("users", {
 export type User = typeof users.$inferSelect;
 export type InsertUser = typeof users.$inferInsert;
 
-// TODO: Add your tables here
+/**
+ * Verification codes for email/phone authentication
+ * Stores temporary codes sent to users for verification
+ */
+export const verificationCodes = mysqlTable("verification_codes", {
+  id: int("id").autoincrement().primaryKey(),
+  /** Email or phone number */
+  contact: varchar("contact", { length: 320 }).notNull(),
+  /** Verification code (6 digits) */
+  code: varchar("code", { length: 6 }).notNull(),
+  /** Type of contact: email or phone */
+  type: mysqlEnum("type", ["email", "phone"]).notNull(),
+  /** Whether the code has been used */
+  used: int("used").default(0).notNull(),
+  /** Expiration time */
+  expiresAt: timestamp("expiresAt").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type VerificationCode = typeof verificationCodes.$inferSelect;
+export type InsertVerificationCode = typeof verificationCodes.$inferInsert;
+
+/**
+ * User profiles with email and phone
+ * Extended user information for contact methods
+ */
+export const userProfiles = mysqlTable("user_profiles", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull(),
+  email: varchar("email", { length: 320 }),
+  phone: varchar("phone", { length: 20 }),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type UserProfile = typeof userProfiles.$inferSelect;
+export type InsertUserProfile = typeof userProfiles.$inferInsert;

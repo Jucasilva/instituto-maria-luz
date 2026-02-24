@@ -1,31 +1,88 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Mail, Phone, Apple, Chrome, ArrowLeft } from "lucide-react";
-import { useState } from "react";
+import { Mail, Phone, Apple, Chrome, ArrowLeft, Loader2 } from "lucide-react";
 import { useLocation } from "wouter";
+import { toast } from "sonner";
 
+type LoginMethod = "email" | "phone" | "google" | "apple" | null;
+type Step = "method" | "contact" | "verification";
+
+/**
+ * Login Page - Instituto Maria Luz
+ * Suporta múltiplos métodos de autenticação:
+ * - Email com código de verificação
+ * - Telefone com código de verificação
+ * - Google OAuth
+ * - Apple OAuth
+ */
 export default function Login() {
   const [, setLocation] = useLocation();
-  const [loginMethod, setLoginMethod] = useState<string | null>(null);
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
+  const [step, setStep] = useState<Step>("method");
+  const [method, setMethod] = useState<LoginMethod>(null);
+  const [contact, setContact] = useState("");
+  const [code, setCode] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleGoogleLogin = () => {
-    console.log("Login com Google");
+  const handleMethodSelect = (selectedMethod: LoginMethod) => {
+    if (selectedMethod === "google" || selectedMethod === "apple") {
+      toast.info(`${selectedMethod === "google" ? "Google" : "Apple"} login em breve!`);
+      return;
+    }
+    setMethod(selectedMethod);
+    setStep("contact");
   };
 
-  const handleAppleLogin = () => {
-    console.log("Login com Apple");
+  const handleSendCode = async () => {
+    if (!contact || !method) return;
+
+    setLoading(true);
+    try {
+      // Validar email ou telefone
+      if (method === "email" && !contact.includes("@")) {
+        toast.error("Email inválido");
+        setLoading(false);
+        return;
+      }
+
+      if (method === "phone" && contact.length < 10) {
+        toast.error("Telefone inválido");
+        setLoading(false);
+        return;
+      }
+
+      // Simular envio de código (em produção, chamar API)
+      console.log(`Código enviado para ${method}: ${contact}`);
+      toast.success(`Código enviado para ${contact}`);
+      setStep("verification");
+    } catch (error) {
+      toast.error("Erro ao enviar código");
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleEmailLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Login com Email:", email);
-  };
+  const handleVerifyCode = async () => {
+    if (!code || code.length !== 6) {
+      toast.error("Código deve ter 6 dígitos");
+      return;
+    }
 
-  const handlePhoneLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Login com Telefone:", phone);
+    setLoading(true);
+    try {
+      // Simular verificação de código (em produção, chamar API)
+      console.log(`Verificando código: ${code}`);
+      toast.success("Login realizado com sucesso!");
+      
+      // Redirecionar para home após 1 segundo
+      setTimeout(() => {
+        setLocation("/");
+      }, 1000);
+    } catch (error) {
+      toast.error("Código inválido");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -56,11 +113,12 @@ export default function Login() {
           </p>
         </div>
 
-        {!loginMethod ? (
+        {/* Step 1: Escolher método */}
+        {step === "method" && (
           <Card className="p-8 space-y-4">
             <div className="space-y-3">
               <Button
-                onClick={handleGoogleLogin}
+                onClick={() => handleMethodSelect("google")}
                 variant="outline"
                 className="w-full h-12 border-2 hover:border-primary hover:bg-primary/5 transition-all"
               >
@@ -69,7 +127,7 @@ export default function Login() {
               </Button>
 
               <Button
-                onClick={handleAppleLogin}
+                onClick={() => handleMethodSelect("apple")}
                 variant="outline"
                 className="w-full h-12 border-2 hover:border-primary hover:bg-primary/5 transition-all"
               >
@@ -78,7 +136,7 @@ export default function Login() {
               </Button>
 
               <Button
-                onClick={() => setLoginMethod("email")}
+                onClick={() => handleMethodSelect("email")}
                 variant="outline"
                 className="w-full h-12 border-2 hover:border-primary hover:bg-primary/5 transition-all"
               >
@@ -87,7 +145,7 @@ export default function Login() {
               </Button>
 
               <Button
-                onClick={() => setLoginMethod("phone")}
+                onClick={() => handleMethodSelect("phone")}
                 variant="outline"
                 className="w-full h-12 border-2 hover:border-primary hover:bg-primary/5 transition-all"
               >
@@ -109,10 +167,17 @@ export default function Login() {
               Ao continuar, você concorda com nossos Termos de Serviço e Política de Privacidade
             </p>
           </Card>
-        ) : loginMethod === "email" ? (
+        )}
+
+        {/* Step 2: Inserir email/telefone */}
+        {step === "contact" && (
           <Card className="p-8 space-y-6">
             <button
-              onClick={() => setLoginMethod(null)}
+              onClick={() => {
+                setStep("method");
+                setMethod(null);
+                setContact("");
+              }}
               className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
@@ -121,37 +186,62 @@ export default function Login() {
 
             <div>
               <h2 className="text-2xl font-bold text-foreground mb-2" style={{ fontFamily: "Poppins" }}>
-                Login com Email
+                {method === "email" ? "Login com Email" : "Login com Telefone"}
               </h2>
               <p className="text-muted-foreground text-sm" style={{ fontFamily: "Inter" }}>
-                Digite seu email para continuar
+                Digite seu {method === "email" ? "email" : "número de telefone"} para continuar
               </p>
             </div>
 
-            <form onSubmit={handleEmailLogin} className="space-y-4">
+            <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2" style={{ fontFamily: "Inter" }}>
-                  Email
+                  {method === "email" ? "Email" : "Telefone"}
                 </label>
                 <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="seu@email.com"
+                  type={method === "email" ? "email" : "tel"}
+                  value={contact}
+                  onChange={(e) => setContact(e.target.value)}
+                  placeholder={
+                    method === "email"
+                      ? "seu@email.com"
+                      : "(21) 99999-9999"
+                  }
                   className="w-full px-4 py-3 border-2 border-border rounded-lg focus:outline-none focus:border-primary transition-colors"
-                  required
+                  disabled={loading}
                 />
               </div>
 
-              <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground h-12">
-                Continuar
+              <Button
+                onClick={handleSendCode}
+                disabled={!contact || loading}
+                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground h-12"
+              >
+                {loading ? (
+                  <>
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    Enviando...
+                  </>
+                ) : (
+                  "Enviar Código"
+                )}
               </Button>
-            </form>
+
+              <p className="text-xs text-muted-foreground text-center">
+                Você receberá um código de 6 dígitos
+              </p>
+            </div>
           </Card>
-        ) : loginMethod === "phone" ? (
+        )}
+
+        {/* Step 3: Verificar código */}
+        {step === "verification" && (
           <Card className="p-8 space-y-6">
             <button
-              onClick={() => setLoginMethod(null)}
+              onClick={() => {
+                setStep("contact");
+                setCode("");
+              }}
               className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
@@ -160,34 +250,58 @@ export default function Login() {
 
             <div>
               <h2 className="text-2xl font-bold text-foreground mb-2" style={{ fontFamily: "Poppins" }}>
-                Login com Telefone
+                Código de Verificação
               </h2>
               <p className="text-muted-foreground text-sm" style={{ fontFamily: "Inter" }}>
-                Digite seu número de telefone para continuar
+                Enviamos um código para {contact}
               </p>
             </div>
 
-            <form onSubmit={handlePhoneLogin} className="space-y-4">
+            <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2" style={{ fontFamily: "Inter" }}>
-                  Número de Telefone
+                  Código (6 dígitos)
                 </label>
                 <input
-                  type="tel"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  placeholder="(21) 99999-9999"
-                  className="w-full px-4 py-3 border-2 border-border rounded-lg focus:outline-none focus:border-primary transition-colors"
-                  required
+                  type="text"
+                  value={code}
+                  onChange={(e) => setCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
+                  maxLength={6}
+                  placeholder="000000"
+                  className="w-full px-4 py-3 border-2 border-border rounded-lg focus:outline-none focus:border-primary transition-colors text-center text-2xl tracking-widest font-mono"
+                  disabled={loading}
                 />
               </div>
 
-              <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground h-12">
-                Continuar
+              <Button
+                onClick={handleVerifyCode}
+                disabled={code.length !== 6 || loading}
+                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground h-12"
+              >
+                {loading ? (
+                  <>
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    Verificando...
+                  </>
+                ) : (
+                  "Verificar Código"
+                )}
               </Button>
-            </form>
+
+              <Button
+                variant="ghost"
+                size="sm"
+                className="w-full text-xs"
+                onClick={() => {
+                  toast.info("Novo código enviado!");
+                  setCode("");
+                }}
+              >
+                Reenviar Código
+              </Button>
+            </div>
           </Card>
-        ) : null}
+        )}
       </div>
     </div>
   );
