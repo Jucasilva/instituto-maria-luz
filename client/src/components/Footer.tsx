@@ -93,7 +93,9 @@ export default function Footer() {
               <li className="flex items-start gap-3">
                 <Mail className="w-4 h-4 mt-1 flex-shrink-0 text-primary" />
                 <a
-                  href="mailto:institutomarialuz@gmail.com"
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=institutomarialuz@gmail.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-background/80 hover:text-white transition-colors"
                 >
                   institutomarialuz@gmail.com

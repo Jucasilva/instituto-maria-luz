@@ -251,7 +251,7 @@ export default function AboutUs() {
               </Button>
               <Button
                 variant="outline"
-                onClick={() => window.location.href = "mailto:institutomarialuz@gmail.com"}
+                onClick={() => window.open("https://mail.google.com/mail/?view=cm&fs=1&to=institutomarialuz@gmail.com", "_blank")}
               >
                 Fale Conosco
               </Button>

@@ -21,7 +21,7 @@ export default function Contact() {
       icon: Mail,
       label: "E-mail",
       value: "institutomarialuz@gmail.com",
-      href: "mailto:institutomarialuz@gmail.com",
+      href: "https://mail.google.com/mail/?view=cm&fs=1&to=institutomarialuz@gmail.com",
     },
     {
       icon: MapPin,
