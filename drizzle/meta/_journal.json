@@ -8,6 +8,13 @@
       "when": 1771903707393,
       "tag": "0000_sudden_azazel",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1771937582101,
+      "tag": "0001_acoustic_ghost_rider",
+      "breakpoints": true
     }
   ]
 }

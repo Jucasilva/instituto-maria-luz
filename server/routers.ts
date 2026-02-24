@@ -2,7 +2,7 @@ import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
-import { updateUserName } from "./db";
+import { updateUserName, createOpinion, getApprovedOpinions } from "./db";
 import { z } from "zod";
 
 export const appRouter = router({
@@ -25,12 +25,22 @@ export const appRouter = router({
       }),
   }),
 
-  // TODO: add feature routers here, e.g.
-  // todo: router({
-  //   list: protectedProcedure.query(({ ctx }) =>
-  //     db.getUserTodos(ctx.user.id)
-  //   ),
-  // }),
+  opinions: router({
+    create: publicProcedure
+      .input(z.object({
+        name: z.string().min(1, "Nome é obrigatório"),
+        email: z.string().email("Email inválido").optional(),
+        comment: z.string().min(10, "Comentário deve ter pelo menos 10 caracteres"),
+        rating: z.number().min(1).max(5).optional(),
+      }))
+      .mutation(async ({ input }) => {
+        await createOpinion(input);
+        return { success: true };
+      }),
+    list: publicProcedure.query(async () => {
+      return await getApprovedOpinions();
+    }),
+  }),
 });
 
 export type AppRouter = typeof appRouter;

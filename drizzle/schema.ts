@@ -62,3 +62,25 @@ export const userProfiles = mysqlTable("user_profiles", {
 
 export type UserProfile = typeof userProfiles.$inferSelect;
 export type InsertUserProfile = typeof userProfiles.$inferInsert;
+/**
+ * Public opinions/testimonials from visitors
+ * Stores comments that appear publicly on the website
+ */
+export const opinions = mysqlTable("opinions", {
+  id: int("id").autoincrement().primaryKey(),
+  /** Name of the person leaving the opinion */
+  name: varchar("name", { length: 255 }).notNull(),
+  /** Email of the person (optional, for contact) */
+  email: varchar("email", { length: 320 }),
+  /** The opinion/comment text */
+  comment: text("comment").notNull(),
+  /** Whether the opinion is approved for public display */
+  approved: int("approved").default(1).notNull(),
+  /** Rating (1-5 stars) */
+  rating: int("rating").default(5),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type Opinion = typeof opinions.$inferSelect;
+export type InsertOpinion = typeof opinions.$inferInsert;

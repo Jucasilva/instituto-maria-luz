@@ -105,3 +105,52 @@ export async function updateUserName(userId: number, name: string): Promise<void
     throw error;
   }
 }
+
+import { desc } from "drizzle-orm";
+import { opinions } from "../drizzle/schema";
+
+export async function createOpinion(data: {
+  name: string;
+  email?: string;
+  comment: string;
+  rating?: number;
+}): Promise<void> {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot create opinion: database not available");
+    return;
+  }
+
+  try {
+    await db.insert(opinions).values({
+      name: data.name,
+      email: data.email,
+      comment: data.comment,
+      rating: data.rating || 5,
+      approved: 1,
+    });
+  } catch (error) {
+    console.error("[Database] Failed to create opinion:", error);
+    throw error;
+  }
+}
+
+export async function getApprovedOpinions() {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot get opinions: database not available");
+    return [];
+  }
+
+  try {
+    const result = await db
+      .select()
+      .from(opinions)
+      .where(eq(opinions.approved, 1))
+      .orderBy(desc(opinions.createdAt));
+    return result;
+  } catch (error) {
+    console.error("[Database] Failed to get opinions:", error);
+    return [];
+  }
+}

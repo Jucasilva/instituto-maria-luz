@@ -4,6 +4,7 @@ import Hero from "@/components/Hero";
 import Projects from "@/components/Projects";
 import Visit from "@/components/Visit";
 import Contact from "@/components/Contact";
+import OpinionsSection from "@/components/OpinionsSection";
 import Footer from "@/components/Footer";
 
 /**
@@ -24,6 +25,7 @@ export default function Home() {
         <Hero />
         <Projects />
         <Visit />
+        <OpinionsSection />
         <Contact />
       </main>
       <Footer />
