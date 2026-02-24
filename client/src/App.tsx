@@ -10,6 +10,7 @@ import HowToHelp from "./pages/HowToHelp";
 import AboutUs from "./pages/AboutUs";
 import News from "./pages/News";
 import CompleteProfile from "./pages/CompleteProfile";
+import Conclusion from "./pages/Conclusion";
 import WhatsAppButton from "./components/WhatsAppButton";
 
 function Router() {
@@ -22,6 +23,7 @@ function Router() {
       <Route path={"/como-ajudar"} component={HowToHelp} />
       <Route path={"/quem-somos"} component={AboutUs} />
       <Route path={"/noticias"} component={News} />
+      <Route path={"/conclusao"} component={Conclusion} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
