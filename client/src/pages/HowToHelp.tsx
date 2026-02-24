@@ -278,31 +278,139 @@ export default function HowToHelp() {
         </div>
       </section>
 
+      {/* Seção de Divulgação */}
+      <section className="py-12 md:py-24 bg-gradient-to-br from-primary/5 to-accent/5 border-t border-primary/20">
+        <div className="container space-y-8">
+          <div className="text-center space-y-4 max-w-3xl mx-auto">
+            <h2
+              className="text-3xl md:text-4xl font-bold text-foreground"
+              style={{ fontFamily: "Poppins" }}
+            >
+              📢 Ajude Divulgando Nosso Trabalho
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              Uma das formas mais poderosas de ajudar é espalhar a palavra sobre o Instituto Maria Luz!
+            </p>
+            <p className="text-lg text-foreground font-semibold">
+              Compartilhe este site com seus amigos, família e colegas. Quanto mais pessoas souberem sobre nossa missão, mais vidas podemos impactar.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+            <Card className="p-6 text-center hover:shadow-lg transition-shadow">
+              <div className="text-4xl mb-4">📱</div>
+              <h3 className="font-semibold text-foreground mb-2">Compartilhe nas Redes Sociais</h3>
+              <p className="text-sm text-muted-foreground">
+                Siga e compartilhe nosso conteúdo no Instagram @institutomarialuz
+              </p>
+            </Card>
+            
+            <Card className="p-6 text-center hover:shadow-lg transition-shadow">
+              <div className="text-4xl mb-4">💬</div>
+              <h3 className="font-semibold text-foreground mb-2">Converse com Pessoas</h3>
+              <p className="text-sm text-muted-foreground">
+                Fale sobre nossos projetos com amigos e familiares. Cada conversa faz diferença!
+              </p>
+            </Card>
+            
+            <Card className="p-6 text-center hover:shadow-lg transition-shadow">
+              <div className="text-4xl mb-4">🔗</div>
+              <h3 className="font-semibold text-foreground mb-2">Envie o Link</h3>
+              <p className="text-sm text-muted-foreground">
+                Compartilhe este site por WhatsApp, email ou qualquer rede social
+              </p>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Final */}
       <section className="py-12 md:py-24 bg-gradient-to-r from-primary/10 to-accent/10">
-        <div className="container text-center space-y-6">
-          <h2
-            className="text-3xl md:text-4xl font-bold text-foreground"
-            style={{ fontFamily: "Poppins" }}
-          >
-            Dúvidas? Entre em Contato!
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            Estamos sempre disponíveis para conversar sobre como você pode ajudar.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              onClick={handleWhatsAppDonation}
-              className="bg-green-600 hover:bg-green-700 text-white"
+        <div className="container space-y-8">
+          <div className="text-center space-y-6">
+            <h2
+              className="text-3xl md:text-4xl font-bold text-foreground"
+              style={{ fontFamily: "Poppins" }}
             >
-              💬 WhatsApp
-            </Button>
-            <Button
-              variant="outline"
-              onClick={() => window.open("https://mail.google.com/mail/?view=cm&fs=1&to=institutomarialuz@gmail.com", "_blank")}
-            >
-              📧 E-mail
-            </Button>
+              Dúvidas? Entre em Contato!
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              Estamos sempre disponíveis para conversar sobre como você pode ajudar.
+            </p>
+          </div>
+          
+          {/* Contact Information Card */}
+          <div className="max-w-2xl mx-auto">
+            <Card className="p-8 bg-white border-2 border-primary/20">
+              <div className="space-y-6">
+                <div className="text-center">
+                  <h3
+                    className="text-2xl font-bold text-foreground mb-2"
+                    style={{ fontFamily: "Poppins" }}
+                  >
+                    Instituto Maria Luz
+                  </h3>
+                  <p className="text-muted-foreground italic">Educação para um mundo melhor</p>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 border-t border-b border-primary/10 py-6">
+                  <div className="space-y-2">
+                    <h4 className="font-semibold text-foreground flex items-center gap-2">
+                      📱 WhatsApp
+                    </h4>
+                    <Button
+                      onClick={handleWhatsAppDonation}
+                      variant="outline"
+                      className="w-full justify-start text-green-600 hover:text-green-700 hover:bg-green-50"
+                    >
+                      (21) 97069-9007
+                    </Button>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <h4 className="font-semibold text-foreground flex items-center gap-2">
+                      📧 E-mail
+                    </h4>
+                    <Button
+                      variant="outline"
+                      onClick={() => window.open("https://mail.google.com/mail/?view=cm&fs=1&to=institutomarialuz@gmail.com", "_blank")}
+                      className="w-full justify-start text-blue-600 hover:text-blue-700 hover:bg-blue-50"
+                    >
+                      institutomarialuz@gmail.com
+                    </Button>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <h4 className="font-semibold text-foreground flex items-center gap-2">
+                      📍 Endereço
+                    </h4>
+                    <p className="text-sm text-muted-foreground">
+                      Rua Estela Pinto, 264 - Casa 2<br />
+                      Ponto Chic, Nova Iguaçu - RJ
+                    </p>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <h4 className="font-semibold text-foreground flex items-center gap-2">
+                      📱 Instagram
+                    </h4>
+                    <Button
+                      variant="outline"
+                      onClick={() => window.open("https://instagram.com/institutomarialuz", "_blank")}
+                      className="w-full justify-start text-pink-600 hover:text-pink-700 hover:bg-pink-50"
+                    >
+                      @institutomarialuz
+                    </Button>
+                  </div>
+                </div>
+                
+                <div className="bg-primary/5 p-4 rounded-lg border border-primary/10">
+                  <p className="text-sm text-center text-muted-foreground">
+                    💡 <strong>Dica:</strong> Você pode nos contatar por qualquer um desses canais. Responderemos assim que possível!
+                  </p>
+                </div>
+              </div>
+            </Card>
           </div>
         </div>
       </section>
