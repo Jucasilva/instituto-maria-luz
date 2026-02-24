@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import HowToHelp from "./pages/HowToHelp";
 import AboutUs from "./pages/AboutUs";
 import News from "./pages/News";
+import CompleteProfile from "./pages/CompleteProfile";
 import WhatsAppButton from "./components/WhatsAppButton";
 
 function Router() {
@@ -17,6 +18,7 @@ function Router() {
     <Switch>
       <Route path={"/"} component={Home} />
       <Route path={"/login"} component={Login} />
+      <Route path={"/completar-perfil"} component={CompleteProfile} />
       <Route path={"/como-ajudar"} component={HowToHelp} />
       <Route path={"/quem-somos"} component={AboutUs} />
       <Route path={"/noticias"} component={News} />

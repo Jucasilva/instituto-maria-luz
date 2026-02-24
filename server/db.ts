@@ -90,3 +90,18 @@ export async function getUserByOpenId(openId: string) {
 }
 
 // TODO: add feature queries here as your schema grows.
+
+export async function updateUserName(userId: number, name: string): Promise<void> {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot update user: database not available");
+    return;
+  }
+
+  try {
+    await db.update(users).set({ name }).where(eq(users.id, userId));
+  } catch (error) {
+    console.error("[Database] Failed to update user name:", error);
+    throw error;
+  }
+}

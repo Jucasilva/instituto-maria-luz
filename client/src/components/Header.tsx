@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, LogOut, User } from "lucide-react";
 import { useState } from "react";
 import { useLocation } from "wouter";
+import { useAuth } from "@/_core/hooks/useAuth";
+import { trpc } from "@/lib/trpc";
 
 /**
  * Design Humanista - Header Component
@@ -11,21 +13,33 @@ import { useLocation } from "wouter";
  */
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [, setLocation] = useLocation();
+  const { user, logout } = useAuth();
+  const logoutMutation = trpc.auth.logout.useMutation();
 
   const navItems = [
-    { label: "Início", href: "#inicio" },
-    { label: "Missão", href: "#missao" },
-    { label: "Projetos", href: "#projetos" },
-    { label: "Visita", href: "#visita" },
-    { label: "Contato", href: "#contato" },
+    { label: "Início", href: "/" },
+    { label: "Como Ajudar", href: "/como-ajudar" },
+    { label: "Quem Somos", href: "/quem-somos" },
+    { label: "Notícias", href: "/noticias" },
   ];
+
+  const handleLogout = async () => {
+    await logoutMutation.mutateAsync();
+    logout();
+    setLocation("/");
+    setIsProfileOpen(false);
+  };
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-sm border-b border-border">
       <div className="container flex items-center justify-between h-16 md:h-20">
         {/* Logo */}
-        <div className="flex items-center gap-2">
+        <div 
+          className="flex items-center gap-2 cursor-pointer"
+          onClick={() => setLocation("/")}
+        >
           <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
             <span className="text-primary-foreground font-bold text-lg">ML</span>
           </div>
@@ -50,21 +64,51 @@ export default function Header() {
             </a>
           ))}
           <div className="flex items-center gap-3">
-            <Button
-              variant="outline"
-              onClick={() => setLocation("/login")}
-            >
-              Login
-            </Button>
-            <Button
-              className="bg-primary hover:bg-primary/90 text-primary-foreground"
-              onClick={() => {
-                const contactSection = document.getElementById("contato");
-                contactSection?.scrollIntoView({ behavior: "smooth" });
-              }}
-            >
-              Ajude-nos
-            </Button>
+            {user ? (
+              <div className="relative">
+                <button
+                  onClick={() => setIsProfileOpen(!isProfileOpen)}
+                  className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary/10 hover:bg-primary/20 transition-colors"
+                >
+                  <User size={18} className="text-primary" />
+                  <span className="text-sm font-medium text-foreground">
+                    Olá, {user.name || "Usuário"}
+                  </span>
+                </button>
+
+                {/* Profile Dropdown */}
+                {isProfileOpen && (
+                  <div className="absolute top-full right-0 mt-2 w-48 bg-white border border-border rounded-lg shadow-lg z-50">
+                    <div className="p-4 border-b border-border">
+                      <p className="text-sm font-semibold text-foreground">{user.name || "Usuário"}</p>
+                      <p className="text-xs text-muted-foreground">{user.email}</p>
+                    </div>
+                    <button
+                      onClick={handleLogout}
+                      className="w-full flex items-center gap-2 px-4 py-3 text-sm text-foreground hover:bg-muted transition-colors text-left"
+                    >
+                      <LogOut size={16} />
+                      Sair
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <>
+                <Button
+                  variant="outline"
+                  onClick={() => setLocation("/login")}
+                >
+                  Login
+                </Button>
+                <Button
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground"
+                  onClick={() => setLocation("/como-ajudar")}
+                >
+                  Ajude-nos
+                </Button>
+              </>
+            )}
           </div>
         </nav>
 
@@ -91,19 +135,47 @@ export default function Header() {
                   {item.label}
                 </a>
               ))}
-              <Button 
-                variant="outline"
-                className="w-full"
-                onClick={() => {
-                  setLocation("/login");
-                  setIsOpen(false);
-                }}
-              >
-                Login
-              </Button>
-              <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
-                Ajude-nos
-              </Button>
+              {user ? (
+                <>
+                  <div className="py-3 px-4 bg-primary/10 rounded-lg">
+                    <p className="text-sm font-semibold text-foreground">Olá, {user.name || "Usuário"}</p>
+                    <p className="text-xs text-muted-foreground">{user.email}</p>
+                  </div>
+                  <Button 
+                    variant="outline"
+                    className="w-full"
+                    onClick={() => {
+                      handleLogout();
+                      setIsOpen(false);
+                    }}
+                  >
+                    <LogOut size={16} className="mr-2" />
+                    Sair
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Button 
+                    variant="outline"
+                    className="w-full"
+                    onClick={() => {
+                      setLocation("/login");
+                      setIsOpen(false);
+                    }}
+                  >
+                    Login
+                  </Button>
+                  <Button 
+                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
+                    onClick={() => {
+                      setLocation("/como-ajudar");
+                      setIsOpen(false);
+                    }}
+                  >
+                    Ajude-nos
+                  </Button>
+                </>
+              )}
             </div>
           </nav>
         )}
