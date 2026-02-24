@@ -84,3 +84,24 @@ export const opinions = mysqlTable("opinions", {
 
 export type Opinion = typeof opinions.$inferSelect;
 export type InsertOpinion = typeof opinions.$inferInsert;
+
+/**
+ * Public messages from visitors
+ * Stores messages that appear publicly on the website
+ */
+export const messages = mysqlTable("messages", {
+  id: int("id").autoincrement().primaryKey(),
+  /** Name of the person leaving the message */
+  name: varchar("name", { length: 255 }).notNull(),
+  /** Email of the person (optional, for contact) */
+  email: varchar("email", { length: 320 }),
+  /** The message text */
+  message: text("message").notNull(),
+  /** Whether the message is approved for public display */
+  approved: int("approved").default(1).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type Message = typeof messages.$inferSelect;
+export type InsertMessage = typeof messages.$inferInsert;

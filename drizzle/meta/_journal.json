@@ -15,6 +15,13 @@
       "when": 1771937582101,
       "tag": "0001_acoustic_ghost_rider",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1771937945972,
+      "tag": "0002_aromatic_kulan_gath",
+      "breakpoints": true
     }
   ]
 }

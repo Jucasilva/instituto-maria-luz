@@ -5,6 +5,7 @@ import Projects from "@/components/Projects";
 import Visit from "@/components/Visit";
 import Contact from "@/components/Contact";
 import OpinionsSection from "@/components/OpinionsSection";
+import MessagesSection from "@/components/MessagesSection";
 import Footer from "@/components/Footer";
 
 /**
@@ -26,6 +27,7 @@ export default function Home() {
         <Projects />
         <Visit />
         <OpinionsSection />
+        <MessagesSection />
         <Contact />
       </main>
       <Footer />

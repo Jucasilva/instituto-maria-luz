@@ -2,7 +2,7 @@ import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
-import { updateUserName, createOpinion, getApprovedOpinions } from "./db";
+import { updateUserName, createOpinion, getApprovedOpinions, createMessage, getApprovedMessages } from "./db";
 import { z } from "zod";
 
 export const appRouter = router({
@@ -39,6 +39,22 @@ export const appRouter = router({
       }),
     list: publicProcedure.query(async () => {
       return await getApprovedOpinions();
+    }),
+  }),
+
+  messages: router({
+    create: publicProcedure
+      .input(z.object({
+        name: z.string().min(1, "Nome é obrigatório"),
+        email: z.string().email("Email inválido").optional(),
+        message: z.string().min(10, "Mensagem deve ter pelo menos 10 caracteres"),
+      }))
+      .mutation(async ({ input }) => {
+        await createMessage(input);
+        return { success: true };
+      }),
+    list: publicProcedure.query(async () => {
+      return await getApprovedMessages();
     }),
   }),
 });

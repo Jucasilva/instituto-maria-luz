@@ -154,3 +154,49 @@ export async function getApprovedOpinions() {
     return [];
   }
 }
+
+import { messages } from "../drizzle/schema";
+
+export async function createMessage(data: {
+  name: string;
+  email?: string;
+  message: string;
+}): Promise<void> {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot create message: database not available");
+    return;
+  }
+
+  try {
+    await db.insert(messages).values({
+      name: data.name,
+      email: data.email,
+      message: data.message,
+      approved: 1,
+    });
+  } catch (error) {
+    console.error("[Database] Failed to create message:", error);
+    throw error;
+  }
+}
+
+export async function getApprovedMessages() {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot get messages: database not available");
+    return [];
+  }
+
+  try {
+    const result = await db
+      .select()
+      .from(messages)
+      .where(eq(messages.approved, 1))
+      .orderBy(desc(messages.createdAt));
+    return result;
+  } catch (error) {
+    console.error("[Database] Failed to get messages:", error);
+    return [];
+  }
+}
