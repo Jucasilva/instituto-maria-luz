@@ -28,7 +28,7 @@ export default function Projects() {
       icon: Heart,
       color: "bg-secondary",
       image:
-        "https://private-us-east-1.manuscdn.com/sessionFile/ljQC4ZGDLZbBpaF40s1fqs/sandbox/pEWoeEc9S42Pp0vjzMb3e5-img-3_1771866483000_na1fn_c2VjYW8tZW5jaGVudGVz.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvbGpRQzRaR0RMWmJCcGFGNDBzMWZxcy9zYW5kYm94L3BFV29lRWM5UzQyUHAwdmp6TWIzZTUtaW1nLTNfMTc3MTg2NjQ4MzAwMF9uYTFmbl9jMlZqWVc4dFpXNWphR1Z1ZEdWei5wbmc~eC1vc3MtcHJvY2Vzcz1pbWFnZS9yZXNpemUsd18xOTIwLGhfMTkyMC9mb3JtYXQsd2VicC9xdWFsaXR5LHFfODAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTg3NjE2MDB9fX1dfQ__&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=b8WZCAnFpAE31QC7GAOGubdkBRt-yq0FFfKTwkUjJROujj4COxh98PDookLPChtWSru0JdeVgPKJfPk7KmFjfNeoL0cecGUN0p4bMzoHYRnlyYOdnmNKFeZrPxDhoNrDh5w3uSIfb~hM7FVbHPFqMLL7xPf1zSXTediuvLkVqohuWmUtbvOj8KSPGiJfMB1o5puR81pjfoOz1kwlE~tsmYoERFQe8e7~i9n-2-SIJWih-tAlpkAtxPexxKaLO1sWdp~usRhJO8NfRXM96MBZcZdd6pzZ9v2PYG6qpeFVzchfu7QqbyxyxJfLW5mUH3IP4K~XnvZ1GQMahAqk~NMCSw__",
+        "https://files.manuscdn.com/user_upload_by_module/session_file/310519663349875959/CTZuBSLTVQrrBNZN.jpeg",
       reverse: true,
     },
     {
