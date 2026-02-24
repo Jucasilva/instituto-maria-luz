@@ -100,8 +100,8 @@ export default function Hero() {
           {/* Imagem - Direita */}
           <div className="relative h-96 md:h-full min-h-96 animate-in fade-in slide-in-from-right-8 duration-700 delay-200">
             <img
-              src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663349875959/tpQHfxizVIWCknNF.jpeg"
-              alt="Instituto Maria Luz - Sala de Aula com Pessoas de Diferentes Idades"
+              src="https://private-us-east-1.manuscdn.com/sessionFile/ljQC4ZGDLZbBpaF40s1fqs/sandbox/jUaiX63HmZ8nirEsMZ3oTq-img-1_1771937720000_na1fn_aGVyby1oYW5kcy13YWxs.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvbGpRQzRaR0RMWmJCcGFGNDBzMWZxcy9zYW5kYm94L2pVYWlYNjNIbVo4bmlyRXNNWjNvVHEtaW1nLTFfMTc3MTkzNzcyMDAwMF9uYTFmbl9hR1Z5Ynkxb1lXNWtjeTEzWVd4cy5wbmc~eC1vc3MtcHJvY2Vzcz1pbWFnZS9yZXNpemUsd18xOTIwLGhfMTkyMC9mb3JtYXQsd2VicC9xdWFsaXR5LHFfODAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTg3NjE2MDB9fX1dfQ__&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=rJdVqSH5Zft22qlIxJ1ErvWZh9Nb65c1mDUC-HEHJdmI1g6F-UUmqCYpxnXZQoGifbQ6DsNKoI~tMEK9LwghGo-L9wxHLiz~OofODcezslMwU8Mv3siQdnwycVM5MsPvDsMrRUam2pSVa7Rdntu3ezDUv0RJRQNX5065TVjECpw7VtMpaO~I35x4zJ3LHnIbYRH2tObvThHdARSMp9M8BHZTEwVwuSf2Bc8v7KkKRemku6Zw21ntYUGRQCK2kDvck7GIWQxYRs9hI1ofY2Y2hSHg2XT8GMo8clEIjokQfv82Eo0ejEVReleTFBU-XPYpmrheQy9zGqZou4wLUMBQPA__"
+              alt="Instituto Maria Luz - Duas Mãos Coloridas na Parede"
               className="w-full h-full object-cover rounded-2xl shadow-2xl"
             />
             {/* Decorative elements */}
