@@ -299,7 +299,7 @@ export default function HowToHelp() {
             </Button>
             <Button
               variant="outline"
-              onClick={() => window.location.href = "mailto:contato@institutomarialuz.org.br"}
+              onClick={() => window.location.href = "mailto:institutomarialuz@gmail.com"}
             >
               📧 E-mail
             </Button>

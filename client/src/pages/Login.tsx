@@ -8,11 +8,40 @@ import { toast } from "sonner";
 type LoginMethod = "email" | "phone" | "google" | "apple" | null;
 type Step = "method" | "contact" | "verification";
 
+// Lista de países com código de área
+const COUNTRY_CODES = [
+  { name: "Brasil", code: "+55", flag: "🇧🇷" },
+  { name: "Estados Unidos", code: "+1", flag: "🇺🇸" },
+  { name: "Portugal", code: "+351", flag: "🇵🇹" },
+  { name: "Canadá", code: "+1", flag: "🇨🇦" },
+  { name: "México", code: "+52", flag: "🇲🇽" },
+  { name: "Argentina", code: "+54", flag: "🇦🇷" },
+  { name: "Chile", code: "+56", flag: "🇨🇱" },
+  { name: "Colômbia", code: "+57", flag: "🇨🇴" },
+  { name: "Peru", code: "+51", flag: "🇵🇪" },
+  { name: "Uruguai", code: "+598", flag: "🇺🇾" },
+  { name: "Paraguai", code: "+595", flag: "🇵🇾" },
+  { name: "Bolívia", code: "+591", flag: "🇧🇴" },
+  { name: "Venezuela", code: "+58", flag: "🇻🇪" },
+  { name: "Equador", code: "+593", flag: "🇪🇨" },
+  { name: "Guiana", code: "+592", flag: "🇬🇾" },
+  { name: "Suriname", code: "+597", flag: "🇸🇷" },
+  { name: "Espanha", code: "+34", flag: "🇪🇸" },
+  { name: "França", code: "+33", flag: "🇫🇷" },
+  { name: "Alemanha", code: "+49", flag: "🇩🇪" },
+  { name: "Itália", code: "+39", flag: "🇮🇹" },
+  { name: "Reino Unido", code: "+44", flag: "🇬🇧" },
+  { name: "Austrália", code: "+61", flag: "🇦🇺" },
+  { name: "Japão", code: "+81", flag: "🇯🇵" },
+  { name: "China", code: "+86", flag: "🇨🇳" },
+  { name: "Índia", code: "+91", flag: "🇮🇳" },
+];
+
 /**
  * Login Page - Instituto Maria Luz
  * Suporta múltiplos métodos de autenticação:
  * - Email com código de verificação
- * - Telefone com código de verificação
+ * - Telefone com código de verificação (com seletor de país)
  * - Google OAuth
  * - Apple OAuth
  */
@@ -21,8 +50,10 @@ export default function Login() {
   const [step, setStep] = useState<Step>("method");
   const [method, setMethod] = useState<LoginMethod>(null);
   const [contact, setContact] = useState("");
+  const [countryCode, setCountryCode] = useState("+55");
   const [code, setCode] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showCountryDropdown, setShowCountryDropdown] = useState(false);
 
   const handleMethodSelect = (selectedMethod: LoginMethod) => {
     if (selectedMethod === "google" || selectedMethod === "apple") {
@@ -52,8 +83,9 @@ export default function Login() {
       }
 
       // Simular envio de código (em produção, chamar API)
-      console.log(`Código enviado para ${method}: ${contact}`);
-      toast.success(`Código enviado para ${contact}`);
+      const fullPhone = method === "phone" ? `${countryCode}${contact}` : contact;
+      console.log(`Código enviado para ${method}: ${fullPhone}`);
+      toast.success(`Código enviado para ${fullPhone}`);
       setStep("verification");
     } catch (error) {
       toast.error("Erro ao enviar código");
@@ -74,9 +106,9 @@ export default function Login() {
       console.log(`Verificando código: ${code}`);
       toast.success("Login realizado com sucesso!");
       
-      // Redirecionar para home após 1 segundo
+      // Redirecionar para completar perfil após 1 segundo
       setTimeout(() => {
-        setLocation("/");
+        setLocation("/complete-profile");
       }, 1000);
     } catch (error) {
       toast.error("Código inválido");
@@ -98,47 +130,35 @@ export default function Login() {
           </button>
 
           <div className="flex items-center justify-center gap-2 mb-4">
-            <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-lg" style={{ fontFamily: "Poppins" }}>
-                ML
-              </span>
+            <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+              <span className="text-primary-foreground font-bold">ML</span>
             </div>
           </div>
-
-          <h1 className="text-3xl font-bold text-foreground mb-2" style={{ fontFamily: "Poppins" }}>
-            Bem-vindo
+          <h1 className="text-3xl font-bold text-foreground" style={{ fontFamily: "Poppins" }}>
+            Login
           </h1>
-          <p className="text-muted-foreground" style={{ fontFamily: "Inter" }}>
+          <p className="text-muted-foreground mt-2" style={{ fontFamily: "Inter" }}>
             Instituto Maria Luz
           </p>
         </div>
 
         {/* Step 1: Escolher método */}
         {step === "method" && (
-          <Card className="p-8 space-y-4">
+          <Card className="p-8 space-y-6">
+            <div>
+              <h2 className="text-xl font-bold text-foreground mb-2" style={{ fontFamily: "Poppins" }}>
+                Como você quer entrar?
+              </h2>
+              <p className="text-muted-foreground text-sm" style={{ fontFamily: "Inter" }}>
+                Escolha seu método preferido de autenticação
+              </p>
+            </div>
+
             <div className="space-y-3">
-              <Button
-                onClick={() => handleMethodSelect("google")}
-                variant="outline"
-                className="w-full h-12 border-2 hover:border-primary hover:bg-primary/5 transition-all"
-              >
-                <Chrome className="w-5 h-5 mr-2" />
-                Continuar com Google
-              </Button>
-
-              <Button
-                onClick={() => handleMethodSelect("apple")}
-                variant="outline"
-                className="w-full h-12 border-2 hover:border-primary hover:bg-primary/5 transition-all"
-              >
-                <Apple className="w-5 h-5 mr-2" />
-                Continuar com Apple
-              </Button>
-
               <Button
                 onClick={() => handleMethodSelect("email")}
                 variant="outline"
-                className="w-full h-12 border-2 hover:border-primary hover:bg-primary/5 transition-all"
+                className="w-full h-12 justify-start text-base"
               >
                 <Mail className="w-5 h-5 mr-2" />
                 Continuar com Email
@@ -147,7 +167,7 @@ export default function Login() {
               <Button
                 onClick={() => handleMethodSelect("phone")}
                 variant="outline"
-                className="w-full h-12 border-2 hover:border-primary hover:bg-primary/5 transition-all"
+                className="w-full h-12 justify-start text-base"
               >
                 <Phone className="w-5 h-5 mr-2" />
                 Continuar com Telefone
@@ -194,22 +214,69 @@ export default function Login() {
             </div>
 
             <div className="space-y-4">
+              {method === "phone" && (
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-2" style={{ fontFamily: "Inter" }}>
+                    País/Código de Área
+                  </label>
+                  <div className="relative">
+                    <button
+                      onClick={() => setShowCountryDropdown(!showCountryDropdown)}
+                      className="w-full px-4 py-3 border-2 border-border rounded-lg focus:outline-none focus:border-primary transition-colors bg-background text-left flex items-center justify-between"
+                    >
+                      <span>
+                        {COUNTRY_CODES.find(c => c.code === countryCode)?.flag}{" "}
+                        {countryCode}
+                      </span>
+                      <span className="text-muted-foreground">▼</span>
+                    </button>
+
+                    {showCountryDropdown && (
+                      <div className="absolute top-full left-0 right-0 mt-2 bg-white border-2 border-border rounded-lg shadow-lg z-50 max-h-64 overflow-y-auto">
+                        {COUNTRY_CODES.map((country) => (
+                          <button
+                            key={country.code + country.name}
+                            onClick={() => {
+                              setCountryCode(country.code);
+                              setShowCountryDropdown(false);
+                            }}
+                            className="w-full px-4 py-3 text-left hover:bg-primary/10 transition-colors border-b border-border last:border-b-0 flex items-center justify-between"
+                          >
+                            <span>
+                              {country.flag} {country.name}
+                            </span>
+                            <span className="text-muted-foreground font-medium">{country.code}</span>
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2" style={{ fontFamily: "Inter" }}>
                   {method === "email" ? "Email" : "Telefone"}
                 </label>
-                <input
-                  type={method === "email" ? "email" : "tel"}
-                  value={contact}
-                  onChange={(e) => setContact(e.target.value)}
-                  placeholder={
-                    method === "email"
-                      ? "seu@email.com"
-                      : "(21) 99999-9999"
-                  }
-                  className="w-full px-4 py-3 border-2 border-border rounded-lg focus:outline-none focus:border-primary transition-colors"
-                  disabled={loading}
-                />
+                <div className="flex gap-2">
+                  {method === "phone" && (
+                    <div className="flex items-center px-4 py-3 border-2 border-border rounded-lg bg-muted">
+                      <span className="font-medium text-foreground">{countryCode}</span>
+                    </div>
+                  )}
+                  <input
+                    type={method === "email" ? "email" : "tel"}
+                    value={contact}
+                    onChange={(e) => setContact(e.target.value)}
+                    placeholder={
+                      method === "email"
+                        ? "seu@email.com"
+                        : "(21) 99999-9999"
+                    }
+                    className="flex-1 px-4 py-3 border-2 border-border rounded-lg focus:outline-none focus:border-primary transition-colors"
+                    disabled={loading}
+                  />
+                </div>
               </div>
 
               <Button
@@ -250,24 +317,24 @@ export default function Login() {
 
             <div>
               <h2 className="text-2xl font-bold text-foreground mb-2" style={{ fontFamily: "Poppins" }}>
-                Código de Verificação
+                Verificar Código
               </h2>
               <p className="text-muted-foreground text-sm" style={{ fontFamily: "Inter" }}>
-                Enviamos um código para {contact}
+                Insira o código de 6 dígitos que enviamos
               </p>
             </div>
 
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2" style={{ fontFamily: "Inter" }}>
-                  Código (6 dígitos)
+                  Código de Verificação
                 </label>
                 <input
                   type="text"
                   value={code}
                   onChange={(e) => setCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
-                  maxLength={6}
                   placeholder="000000"
+                  maxLength={6}
                   className="w-full px-4 py-3 border-2 border-border rounded-lg focus:outline-none focus:border-primary transition-colors text-center text-2xl tracking-widest font-mono"
                   disabled={loading}
                 />
@@ -288,17 +355,9 @@ export default function Login() {
                 )}
               </Button>
 
-              <Button
-                variant="ghost"
-                size="sm"
-                className="w-full text-xs"
-                onClick={() => {
-                  toast.info("Novo código enviado!");
-                  setCode("");
-                }}
-              >
-                Reenviar Código
-              </Button>
+              <p className="text-xs text-muted-foreground text-center">
+                Não recebeu o código? Verifique sua pasta de spam
+              </p>
             </div>
           </Card>
         )}

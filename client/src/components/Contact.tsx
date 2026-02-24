@@ -20,8 +20,8 @@ export default function Contact() {
     {
       icon: Mail,
       label: "E-mail",
-      value: "contato@institutomarialuz.org.br",
-      href: "mailto:contato@institutomarialuz.org.br",
+      value: "institutomarialuz@gmail.com",
+      href: "mailto:institutomarialuz@gmail.com",
     },
     {
       icon: MapPin,
