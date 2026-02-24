@@ -17,7 +17,7 @@ export default function Projects() {
       icon: BookOpen,
       color: "bg-primary",
       image:
-        "https://files.manuscdn.com/user_upload_by_module/session_file/310519663349875959/CTZuBSLTVQrrBNZN.jpeg",
+        "https://files.manuscdn.com/user_upload_by_module/session_file/310519663349875959/tpQHfxizVIWCknNF.jpeg",
       reverse: false,
     },
     {
