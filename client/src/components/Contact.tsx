@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Mail, MapPin, Phone, Instagram, Linkedin } from "lucide-react";
+import { Mail, MapPin, Phone, Instagram, Linkedin, Clock, MessageCircle } from "lucide-react";
 
 /**
  * Design Humanista - Contact Component
@@ -12,15 +12,27 @@ import { Mail, MapPin, Phone, Instagram, Linkedin } from "lucide-react";
 export default function Contact() {
   const contactInfo = [
     {
-      icon: Phone,
-      label: "Telefone",
+      icon: MessageCircle,
+      label: "WhatsApp",
       value: "(21) 97069-9007",
-      href: "tel:+5521970699007",
+      href: "https://wa.me/5521970699007?text=Olá! Gostaria de conhecer mais sobre o Instituto Maria Luz",
+    },
+    {
+      icon: Mail,
+      label: "E-mail",
+      value: "contato@institutomarialuz.org.br",
+      href: "mailto:contato@institutomarialuz.org.br",
     },
     {
       icon: MapPin,
       label: "Endereço",
-      value: "Rua Estela Pinto, 264 - Casa 2, Ponto Chic",
+      value: "Rua Estela Pinto, 264 - Casa 2, Ponto Chic, Nova Iguaçu - RJ",
+      href: "https://maps.google.com/?q=Rua+Estela+Pinto+264+Ponto+Chic+Nova+Iguaçu",
+    },
+    {
+      icon: Clock,
+      label: "Horário de Atendimento",
+      value: "Seg-Sex: 8h às 17h | Sab: 9h às 13h",
       href: "#",
     },
     {
@@ -131,9 +143,13 @@ export default function Contact() {
                   ></textarea>
                 </div>
 
-                <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-medium">
+                <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-medium" type="submit">
                   Enviar Mensagem
                 </Button>
+
+                <p className="text-xs text-muted-foreground text-center">
+                  Responderemos em breve! 💚
+                </p>
               </form>
             </Card>
           </div>

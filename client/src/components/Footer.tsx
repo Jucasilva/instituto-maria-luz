@@ -1,90 +1,174 @@
-import { Heart } from "lucide-react";
+import { Instagram, Linkedin, Mail, MapPin, Phone, Facebook, Heart } from "lucide-react";
+import { useLocation } from "wouter";
 
 /**
- * Design Humanista - Footer Component
- * Rodapé com informações da ONG e links
- * Tipografia: Inter para conteúdo
- * Cores: Verde Esperança como primária
+ * Footer Component - Instituto Maria Luz
+ * Rodapé completo com informações, links e redes sociais
  */
 export default function Footer() {
+  const [, setLocation] = useLocation();
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-foreground text-primary-foreground py-12 md:py-16">
+    <footer className="bg-foreground text-background pt-12 md:pt-24 pb-6">
       <div className="container">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-          {/* Sobre */}
+        {/* Main Footer Content */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+          {/* Brand */}
           <div className="space-y-4">
-            <h3 className="font-bold text-lg" style={{ fontFamily: "Poppins" }}>
-              Instituto Maria Luz
-            </h3>
-            <p className="text-sm text-primary-foreground/80" style={{ fontFamily: "Inter" }}>
-              Educação para um mundo melhor. Transformando vidas através da alfabetização e apoio
-              comunitário.
+            <div className="flex items-center gap-2">
+              <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                <span className="text-foreground font-bold" style={{ fontFamily: "Poppins" }}>
+                  ML
+                </span>
+              </div>
+              <div>
+                <h3 className="font-bold" style={{ fontFamily: "Poppins" }}>
+                  Maria Luz
+                </h3>
+                <p className="text-xs text-background/70">Educação para um mundo melhor</p>
+              </div>
+            </div>
+            <p className="text-sm text-background/80">
+              Transformando vidas através da educação e solidariedade.
             </p>
           </div>
 
-          {/* Links Rápidos */}
+          {/* Quick Links */}
           <div className="space-y-4">
-            <h3 className="font-bold text-lg" style={{ fontFamily: "Poppins" }}>
+            <h4 className="font-bold" style={{ fontFamily: "Poppins" }}>
               Links Rápidos
-            </h3>
-            <ul className="space-y-2 text-sm" style={{ fontFamily: "Inter" }}>
+            </h4>
+            <ul className="space-y-2 text-sm">
               <li>
-                <a href="#inicio" className="hover:text-white transition-colors">
-                  Início
-                </a>
+                <button
+                  onClick={() => setLocation("/")}
+                  className="text-background/80 hover:text-white transition-colors"
+                >
+                  Home
+                </button>
               </li>
               <li>
-                <a href="#projetos" className="hover:text-white transition-colors">
+                <button
+                  onClick={() => setLocation("/como-ajudar")}
+                  className="text-background/80 hover:text-white transition-colors"
+                >
+                  Como Ajudar
+                </button>
+              </li>
+              <li>
+                <a
+                  href="#projetos"
+                  className="text-background/80 hover:text-white transition-colors"
+                >
                   Projetos
                 </a>
               </li>
               <li>
-                <a href="#visita" className="hover:text-white transition-colors">
-                  Nossa Visita
-                </a>
-              </li>
-              <li>
-                <a href="#contato" className="hover:text-white transition-colors">
+                <a
+                  href="#contato"
+                  className="text-background/80 hover:text-white transition-colors"
+                >
                   Contato
                 </a>
               </li>
             </ul>
           </div>
 
-          {/* Redes Sociais */}
+          {/* Contact Info */}
           <div className="space-y-4">
-            <h3 className="font-bold text-lg" style={{ fontFamily: "Poppins" }}>
-              Redes Sociais
-            </h3>
-            <div className="flex gap-4">
+            <h4 className="font-bold" style={{ fontFamily: "Poppins" }}>
+              Contato
+            </h4>
+            <ul className="space-y-3 text-sm">
+              <li className="flex items-start gap-3">
+                <Phone className="w-4 h-4 mt-1 flex-shrink-0 text-primary" />
+                <a
+                  href="https://wa.me/5521970699007"
+                  className="text-background/80 hover:text-white transition-colors"
+                >
+                  (21) 97069-9007
+                </a>
+              </li>
+              <li className="flex items-start gap-3">
+                <Mail className="w-4 h-4 mt-1 flex-shrink-0 text-primary" />
+                <a
+                  href="mailto:contato@institutomarialuz.org.br"
+                  className="text-background/80 hover:text-white transition-colors"
+                >
+                  contato@institutomarialuz.org.br
+                </a>
+              </li>
+              <li className="flex items-start gap-3">
+                <MapPin className="w-4 h-4 mt-1 flex-shrink-0 text-primary" />
+                <span className="text-background/80">
+                  Rua Estela Pinto, 264<br />
+                  Ponto Chic, Nova Iguaçu - RJ
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Social Media */}
+          <div className="space-y-4">
+            <h4 className="font-bold" style={{ fontFamily: "Poppins" }}>
+              Siga-nos
+            </h4>
+            <div className="flex gap-3">
               <a
                 href="https://instagram.com/institutomarialuz"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-white transition-colors"
+                className="bg-primary/20 hover:bg-primary/40 p-3 rounded-lg transition-colors"
+                title="Instagram"
               >
-                Instagram
+                <Instagram className="w-5 h-5 text-primary" />
               </a>
-              <a href="#" className="hover:text-white transition-colors">
-                LinkedIn
+              <a
+                href="https://www.facebook.com/share/1KLbzVf9DH/?mibextid=wwXIfr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-primary/20 hover:bg-primary/40 p-3 rounded-lg transition-colors"
+                title="Facebook"
+              >
+                <Facebook className="w-5 h-5 text-primary" />
+              </a>
+              <a
+                href="https://br.linkedin.com/in/instituto-maria-luz-ong-7b963a245?utm_source=share&utm_medium=member_mweb&utm_campaign=share_via&utm_content=profile"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-primary/20 hover:bg-primary/40 p-3 rounded-lg transition-colors"
+                title="LinkedIn"
+              >
+                <Linkedin className="w-5 h-5 text-primary" />
               </a>
             </div>
           </div>
         </div>
 
         {/* Divider */}
-        <div className="border-t border-primary-foreground/20 pt-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-sm text-primary-foreground/80" style={{ fontFamily: "Inter" }}>
-              &copy; {currentYear} Instituto Maria Luz. Todos os direitos reservados.
-            </p>
-            <div className="flex items-center gap-2 text-sm">
-              <span>Feito com</span>
-              <Heart className="w-4 h-4 fill-current" />
-              <span>para transformar vidas</span>
-            </div>
+        <div className="border-t border-background/20 my-8"></div>
+
+        {/* Bottom Footer */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center text-sm text-background/70">
+          <div>
+            <p>© {currentYear} Instituto Maria Luz. Todos os direitos reservados.</p>
+          </div>
+
+          <div className="flex justify-center gap-4">
+            <a href="#" className="hover:text-white transition-colors">
+              Política de Privacidade
+            </a>
+            <span>•</span>
+            <a href="#" className="hover:text-white transition-colors">
+              Termos de Uso
+            </a>
+          </div>
+
+          <div className="text-right flex items-center justify-end gap-2">
+            <span>Feito com</span>
+            <Heart className="w-4 h-4 fill-current text-primary" />
+            <span>para transformar vidas</span>
           </div>
         </div>
       </div>

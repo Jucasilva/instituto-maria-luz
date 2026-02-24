@@ -6,6 +6,10 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import HowToHelp from "./pages/HowToHelp";
+import AboutUs from "./pages/AboutUs";
+import News from "./pages/News";
+import WhatsAppButton from "./components/WhatsAppButton";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -13,6 +17,9 @@ function Router() {
     <Switch>
       <Route path={"/"} component={Home} />
       <Route path={"/login"} component={Login} />
+      <Route path={"/como-ajudar"} component={HowToHelp} />
+      <Route path={"/quem-somos"} component={AboutUs} />
+      <Route path={"/noticias"} component={News} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
@@ -35,6 +42,7 @@ function App() {
         <TooltipProvider>
           <Toaster />
           <Router />
+          <WhatsAppButton />
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>

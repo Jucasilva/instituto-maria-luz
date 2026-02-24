@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Heart, Users } from "lucide-react";
+import { useLocation } from "wouter";
 
 /**
  * Design Humanista - Hero Component
@@ -9,6 +10,13 @@ import { ArrowRight } from "lucide-react";
  * Animação: Fade-in ao carregar com parallax suave
  */
 export default function Hero() {
+  const [, setLocation] = useLocation();
+
+  const scrollToProjects = () => {
+    const projectsSection = document.getElementById("projetos");
+    projectsSection?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <section
       id="inicio"
@@ -38,37 +46,48 @@ export default function Hero() {
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+            <div className="flex flex-col sm:flex-row gap-3 pt-4 flex-wrap">
               <Button
                 size="lg"
                 className="bg-primary hover:bg-primary/90 text-primary-foreground group"
+                onClick={() => setLocation("/como-ajudar")}
               >
-                Conheça Nossos Projetos
-                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <Heart className="mr-2 w-5 h-5" />
+                Quero Doar
+              </Button>
+              <Button
+                size="lg"
+                className="bg-accent hover:bg-accent/90 text-accent-foreground group"
+                onClick={() => setLocation("/como-ajudar#voluntario")}
+              >
+                <Users className="mr-2 w-5 h-5" />
+                Ser Voluntário
               </Button>
               <Button
                 size="lg"
                 variant="outline"
                 className="border-primary text-primary hover:bg-primary/5"
+                onClick={scrollToProjects}
               >
-                Saiba Mais
+                Conhecer Projetos
+                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Button>
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-2 gap-6 pt-8 border-t border-border">
-              <div>
+            <div className="grid grid-cols-2 gap-6 pt-8 border-t border-border mt-8">
+              <div className="space-y-2">
                 <p
-                  className="text-3xl font-bold text-primary"
+                  className="text-3xl md:text-4xl font-bold text-primary"
                   style={{ fontFamily: "Poppins" }}
                 >
                   +500
                 </p>
                 <p className="text-sm text-muted-foreground">Pessoas alfabetizadas</p>
               </div>
-              <div>
+              <div className="space-y-2">
                 <p
-                  className="text-3xl font-bold text-secondary"
+                  className="text-3xl md:text-4xl font-bold text-accent"
                   style={{ fontFamily: "Poppins" }}
                 >
                   +1000
@@ -87,7 +106,7 @@ export default function Hero() {
             />
             {/* Decorative elements */}
             <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-primary/10 rounded-full blur-2xl hidden"></div>
-            <div className="absolute -top-4 -left-4 w-32 h-32 bg-secondary/10 rounded-full blur-2xl hidden"></div>
+            <div className="absolute -top-4 -left-4 w-32 h-32 bg-accent/10 rounded-full blur-2xl hidden"></div>
           </div>
         </div>
       </div>
